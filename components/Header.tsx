@@ -9,11 +9,11 @@ const Header: FC = () => {
         <Link href={'/'} className="text-blue-300 hover:text-blue-500">
           Home
         </Link>
-        <Link href={'/login'} className="text-blue-300 hover:text-blue-500">
+        <Link href={'/join'} className="text-blue-300 hover:text-blue-500">
           Login
         </Link>
         <Link href={'/dashboard'} className="text-blue-300 hover:text-blue-500">
-          Dash
+          Dashboard
         </Link>
       </nav>
     </section>

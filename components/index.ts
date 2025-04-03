@@ -1,7 +1,6 @@
 import Header from './Header';
 import Footer from './Footer';
 
-import LoginForm from './auth/LoginForm';
-import RegsiterForm from './auth/RegisterForm';
+import EmailInputAndSubmit from './molecules/EmailInputAndSubmit';
 
-export { Header, Footer, LoginForm, RegsiterForm };
+export { Header, Footer, EmailInputAndSubmit };
