@@ -4,7 +4,6 @@ import React, { useState, FormEvent, ChangeEvent } from 'react';
 
 const EmailInputAndSubmit: React.FC = () => {
   const [email, setEmail] = useState<string>('');
-  const [isValid, setIsValid] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
   const validateEmail = (email: string): boolean => {
@@ -15,21 +14,23 @@ const EmailInputAndSubmit: React.FC = () => {
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setEmail(value);
-
-    if (!value) {
-      setError('');
-      setIsValid(false);
-    } else if (!validateEmail(value)) {
-      setError('Please enter a valid email.');
-      setIsValid(false);
-    } else {
-      setError('');
-      setIsValid(true);
-    }
+    setError('');
   };
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!email) {
+      setError('Email is required.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email.');
+      return;
+    }
+
+    setError('');
     console.log('Submitted Email:', email);
   };
 
@@ -40,19 +41,19 @@ const EmailInputAndSubmit: React.FC = () => {
     >
       {error && <p className="text-left text-[11px] text-red-500">{error}</p>}
       <input
-        className="w-[300px] rounded-lg bg-zinc-800 px-4 py-2 text-white outline-none placeholder:font-normal"
-        type="email"
+        className="h-12 w-[300px] rounded-lg bg-zinc-800 px-4 py-2 text-sm text-white outline-none placeholder:font-normal"
+        type="text"
         name="email"
         value={email}
         placeholder="Enter your email"
-        id="email"
+        // id="email"
         onChange={onChangeHandler}
       />
 
       <button
-        className="w-[300px] gap-x-2 rounded-lg bg-zinc-800 px-4 py-2 font-medium outline-none placeholder:font-normal disabled:text-zinc-500"
+        className="h-10 w-[300px] gap-x-2 rounded-lg bg-zinc-800 px-4 py-2 font-medium outline-none placeholder:font-normal disabled:text-zinc-500"
         type="submit"
-        disabled={!isValid}
+        disabled={email === ''}
       >
         Continue with email
       </button>
